@@ -1,15 +1,18 @@
 import { Injectable, ɵPlayState } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 import { apiConfig } from 'src/app/core/shared/api-config';
 import { ApiService } from 'src/app/core/shared/services/api.service';
+import { PokemonModel } from '../interfaces/pokemon.model';
+import { StoreService } from './store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreApiService {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,
+    private storeService: StoreService) { }
 
   public getPokemon(id: number): Observable<any> {
     const payload = { id };
@@ -21,7 +24,7 @@ export class StoreApiService {
       .pipe(
         pluck('results'),
         map((types: any) => {
-          return types.map((t) => ({ id: this.retrieveId(t.url), ...t }))
+          return types.map((t) => ({ id: this.storeService.retrieveId(t.url), ...t }))
         })
       )
   }
@@ -32,14 +35,27 @@ export class StoreApiService {
       .pipe(
         pluck('pokemon'),
         map((pokemonList: any) => {
-          return pokemonList.map((p) => ({ id: this.retrieveId(p.pokemon.url), name: p.pokemon.name }))
+          return pokemonList.map((p) => ({ id: this.storeService.retrieveId(p.pokemon.url), name: p.pokemon.name }))
         })
       )
   }
 
-  private retrieveId(urlId): string {
-    return urlId.split('/').slice(-2)[0];
-  }
+  public getPokemonByIdOrName(id: string): Observable<any> {
+    const payload = { id };
+    return this.apiService.get(apiConfig.get_pokemon, payload)
+      .pipe(
+        map((pokemon: any) => {
+          const types = pokemon.types.map(t => ({ name: t.type.name, id: this.storeService.retrieveId(t.type.url) }));
 
+          return <PokemonModel>{
+            id: pokemon.id,
+            name: pokemon.name,
+            types: types,
+            price: pokemon.weight,
+            img: pokemon.sprites.other.dream_world.front_default,
+          }
+        })
+      )
+  }
 
 }

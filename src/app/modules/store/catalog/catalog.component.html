@@ -1,3 +1,13 @@
-<div *ngFor="let type of pokemonList">
-    <p>{{ type.id }} - {{ type.name }}</p>
+<div class="row">
+    <div class="col-4 items" *ngFor="let pokemon of pokemonListPage">
+        <app-item [pokemonId]="pokemon.id"></app-item>
+    </div>
+</div>
+
+<div class="row">
+    <app-paginator *ngIf="pokemonListFull"
+        [items]="pokemonListFull"
+        [itemsPerPage]="itemsPerPage"
+        (itemsPage)="updateActualItems($event)"
+    ></app-paginator>
 </div>

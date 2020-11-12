@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map, pluck, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { PokemonModel } from '../shared/interfaces/pokemon.model';
 import { StoreApiService } from '../shared/services/store-api.service';
 
 @Component({
@@ -12,11 +13,13 @@ export class CatalogComponent implements OnInit {
   constructor(private storeApiService: StoreApiService) { }
 
   public pokemonTypes: Array<any>;
-  public pokemonList: Array<any>;
+  public pokemonListFull: Array<PokemonModel>;
+  public pokemonListPage: Array<PokemonModel>;
+  public itemsPerPage: number = 6;
 
   public ngOnInit(): void {
-    this.getTypes();
-    this.getAllPokemonFromType(10);
+    // this.getTypes();
+    this.getAllPokemonNameFromType(10);
   }
 
   public getTypes(): void {
@@ -25,10 +28,15 @@ export class CatalogComponent implements OnInit {
     ).subscribe();
   }
 
-  public getAllPokemonFromType(typeId): void {
+  public getAllPokemonNameFromType(typeId): void {
     this.storeApiService.getAllPokemonsFromType(typeId).pipe(
-      tap(pokemons => this.pokemonList = pokemons)
+      tap(pokemons => this.pokemonListFull = pokemons),
     ).subscribe();
   }
+
+  public updateActualItems(event): void {
+    this.pokemonListPage = event;
+  }
+
 
 }

@@ -1,0 +1,8 @@
+<div>
+    <button [disabled]="isDisabledBack()" (click)="back(true)"> &lt;&lt; </button>
+    <button [disabled]="isDisabledBack()" (click)="back()"> &lt; </button>
+    <p>{{ pageActual }} de {{ pageTotal }}</p>
+    <button [disabled]="isDisabledNext()" (click)="next()"> &gt; </button>
+    <button [disabled]="isDisabledNext()" (click)="next(true)"> &gt;&gt; </button>
+</div>
+

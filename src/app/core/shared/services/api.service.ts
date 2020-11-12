@@ -22,6 +22,10 @@ export class ApiService {
     
   }
 
+  public getImage(imageUrl: string): Observable<Blob> {
+    return this.http.get(imageUrl, { responseType: 'blob' });
+  }
+
   public mountGetUrl(url: string, payload?: any): Observable<string> {
     return payload ? of(api + url + Object.values(payload).reduce((prev, curr) => prev + '/' + curr)) : of(api + url);
   }

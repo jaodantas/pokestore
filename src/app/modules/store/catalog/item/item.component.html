@@ -1,0 +1,9 @@
+<div *ngIf="pokemon$ | async as pokemon; else loading">
+    <p>Nome: {{ pokemon?.name }}</p>
+    <p>Preço: {{ pokemon?.price }}</p>
+    <img [src]="pokemon?.img" [alt]="pokemon?.name">
+</div>
+
+<ng-template #loading>
+    <p>Carregando...</p>
+</ng-template>
