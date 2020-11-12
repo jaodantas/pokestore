@@ -46,7 +46,6 @@ export class PaginatorComponent implements OnInit {
   }
 
   private updateItemsActual(): void {
-    debugger;
     this.itemsActual = this.items.slice(this.initialPageItem, this.initialPageItem + this.itemsPerPage);
   }
 

@@ -27,6 +27,6 @@ export class ApiService {
   }
 
   public mountGetUrl(url: string, payload?: any): Observable<string> {
-    return payload ? of(api + url + Object.values(payload).reduce((prev, curr) => prev + '/' + curr)) : of(api + url);
+    return payload ? of(url + Object.values(payload).reduce((prev, curr) => prev + '/' + curr)) : of(url);
   }
 }

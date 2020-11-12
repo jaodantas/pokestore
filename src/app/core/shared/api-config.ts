@@ -1,5 +1,5 @@
 export const apiConfig = {
-    get_pokemon: '/pokemon/',
-    get_species: '/pokemon-species/',
-    get_types: '/type/'
+    get_pokemon: '/api/pokemon/',
+    get_species: '/api/pokemon-species/',
+    get_types: '/api/type/'
 }
