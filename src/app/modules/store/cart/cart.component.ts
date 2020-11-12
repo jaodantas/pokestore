@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { CartModel } from '../shared/interfaces/cart.model';
 
 @Component({
@@ -9,17 +10,13 @@ import { CartModel } from '../shared/interfaces/cart.model';
 })
 export class CartComponent implements OnInit {
 
-  public cart: CartModel;
+  public cart$: Observable<CartModel>;
 
-  constructor(private store: Store<CartModel>) { }
+  constructor(private store: Store<{cart: CartModel}>) { 
+    this.cart$ = this.store.pipe(select('cart'));
+  }
 
   public ngOnInit(): void {
-    this.store.subscribe(
-      (next) => { 
-        this.cart = next;
-        console.log(this.cart);
-      }
-    );
   }
 
 }

@@ -1,4 +1,10 @@
-<div>
+<div *ngIf="cart$ | async as cart">
     <p>Carrinho: </p>
-    <p>{{cart | json }}</p>
+    <div>
+        <div *ngFor="let pokemon of cart?.items">
+            <p>Nome: {{ pokemon.name }}</p>
+            <p>Preço: {{ pokemon.price }}</p>
+            <p>Qt: {{ pokemon.quantity }}</p>
+        </div>
+    </div>
 </div>

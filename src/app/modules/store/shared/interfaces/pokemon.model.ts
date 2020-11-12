@@ -6,4 +6,5 @@ export interface PokemonModel {
     types: Array<TypeModel>,
     img: string;
     price: string;
+    quantity?: number;
 }

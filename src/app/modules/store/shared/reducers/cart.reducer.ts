@@ -10,7 +10,7 @@ export const initialState: CartModel = {
 
 const _cartReducer = createReducer(initialState,
   on(add, (state, { pokemon }) => {
-    return { items: [ ...state.items, pokemon], total: getTotal([ ...state.items, pokemon]) }
+    return { items: increaseItem(state.items, pokemon), total: getTotal([ ...state.items, pokemon]) }
   }),
 //   on(decrement, state => state - 1),
 //   on(reset, state => 0),
@@ -21,10 +21,17 @@ export function cartReducer(state, action) {
 }
 
 const getTotal = (items: Array<any>): number => {
-    const res = items.reduce((prev, cur) => {
-      return prev.price + cur.price
-    });
+  return items.reduce((prev, cur) => {
+    return prev.price + cur.price;
+  });
+}
+
+const increaseItem = (items: Array<PokemonModel>, newItem: PokemonModel): Array<PokemonModel> => {
+  if (items.some(e => e.id === newItem.id)) {
+    const actualItem = items.filter(f => f.id === newItem.id)[0];
+    return [ ...items, { ...actualItem, quantity: actualItem.quantity + 1 }];
+  } else {
+    return [ ...items, { ...newItem, quantity: 1 } ];
+  }
     
-    debugger;
-    return res;
 }
