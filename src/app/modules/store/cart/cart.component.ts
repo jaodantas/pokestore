@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { clean } from '../shared/actions/cart.actions';
 import { CartModel } from '../shared/interfaces/cart.model';
 
 @Component({
@@ -17,6 +18,10 @@ export class CartComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+  }
+
+  public clean(): void {
+    this.store.dispatch(clean());
   }
 
 }

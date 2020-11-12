@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PokemonModel } from '../../shared/interfaces/pokemon.model';
 import { StoreApiService } from '../../shared/services/store-api.service';
-import { add } from '../../shared/actions/cart.actions'
+import { add, decrement } from '../../shared/actions/cart.actions'
 import { CartModel } from '../../shared/interfaces/cart.model';
 
 @Component({
@@ -30,6 +30,10 @@ export class ItemComponent implements OnInit {
 
   public add(pokemon): void {
     this.store.dispatch(add({ pokemon }));
+  }
+
+  public decrement(pokemon): void {
+    this.store.dispatch(decrement({ pokemon }));
   }
 
 }

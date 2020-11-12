@@ -3,6 +3,7 @@
     <p>Preço: {{ pokemon?.price }}</p>
     <img [src]="pokemon?.img" [alt]="pokemon?.name">
     <button (click)=add(pokemon)>Add</button>
+    <button (click)=decrement(pokemon)>Remove</button>
 </div>
 
 <ng-template #loading>
