@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreComponent } from 'src/app/modules/store/store.component';
-import { StoreModule } from 'src/app/modules/store/store.module';
+import { PokeStoreModule } from 'src/app/modules/store/store.module';
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent },
@@ -10,7 +10,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    StoreModule,
+    PokeStoreModule,
   ],
   exports: [RouterModule]
 })

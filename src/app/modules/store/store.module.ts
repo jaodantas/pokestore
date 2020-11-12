@@ -19,4 +19,4 @@ import { PaginatorModule } from 'src/app/core/layout/components/paginator/pagina
     StoreComponent,
   ]
 })
-export class StoreModule { }
+export class PokeStoreModule { }

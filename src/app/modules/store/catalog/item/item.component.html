@@ -2,6 +2,7 @@
     <p>Nome: {{ pokemon?.name }}</p>
     <p>Preço: {{ pokemon?.price }}</p>
     <img [src]="pokemon?.img" [alt]="pokemon?.name">
+    <button (click)=add(pokemon)>Add</button>
 </div>
 
 <ng-template #loading>
