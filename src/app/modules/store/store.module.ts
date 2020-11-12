@@ -4,7 +4,6 @@ import { CartModule } from './cart/cart.module';
 import { CatalogModule } from './catalog/catalog.module';
 import { StoreComponent } from './store.component';
 
-
 @NgModule({
   declarations: [
     StoreComponent,
@@ -13,6 +12,9 @@ import { StoreComponent } from './store.component';
     CommonModule,
     CartModule,
     CatalogModule,
+  ],
+  exports: [
+    StoreComponent,
   ]
 })
 export class StoreModule { }

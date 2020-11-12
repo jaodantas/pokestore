@@ -8,6 +8,7 @@ import { CatalogComponent } from './catalog.component';
   declarations: [CatalogComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [CatalogComponent]
 })
 export class CatalogModule { }

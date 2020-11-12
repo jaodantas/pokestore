@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pokestore"
+    }
+  },
+  "defaultProject": "pokestore",
+  "cli": {
+    "analytics": false
+  }
 }
