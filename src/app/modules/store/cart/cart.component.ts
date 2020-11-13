@@ -12,6 +12,7 @@ import { CartModel } from '../shared/interfaces/cart.model';
 export class CartComponent implements OnInit {
 
   public cart$: Observable<CartModel>;
+  public modalShow: boolean = false;
 
   constructor(private store: Store<{cart: CartModel}>) { 
     this.cart$ = this.store.pipe(select('cart'));
@@ -25,7 +26,11 @@ export class CartComponent implements OnInit {
   }
 
   public finish(): void {
-    
+    this.modalShow = true;
+  }
+
+  public onModalClose(event): void {
+    this.modalShow = event && false;
   }
 
 }

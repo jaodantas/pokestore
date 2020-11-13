@@ -15,3 +15,10 @@
         <button (click)="clean()">Limpar</button>
     </div>
 </div>
+
+<app-modal
+    [show]="modalShow"
+    title="Modal"
+    message="Mensagem"
+    (onClose)="onModalClose($event)">
+</app-modal>
