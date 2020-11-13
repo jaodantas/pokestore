@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-paginator',
@@ -7,10 +8,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PaginatorComponent implements OnInit {
 
-  @Input() items: Array<any>;
+  @Input() items$: Subject<Array<any>>;
   @Input() itemsPerPage: number = 6;
   @Output() itemsPage = new EventEmitter<any>();
 
+  public itemsFull: Array<any>;
   public itemsActual: Array<any>;
   public pageActual: number;
   public pageTotal: number;
@@ -18,11 +20,18 @@ export class PaginatorComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-    this.pageTotal = Math.floor(this.items.length / this.itemsPerPage)
-      + ( (this.items.length % this.itemsPerPage) ? 1 : 0);
-    this.pageActual = 1;
-    this.updateItemsActual();
-    this.sendActualItems();
+
+    this.items$.subscribe(
+      (items) => {
+        this.itemsFull = items;
+        this.pageTotal = Math.floor(items.length / this.itemsPerPage)
+          + ( (items.length % this.itemsPerPage) ? 1 : 0);
+        this.pageActual = 1;
+        this.updateItemsActual();
+        this.sendActualItems();
+      }
+    )
+
   }
 
   public next(toTheEnd?: boolean): void {
@@ -46,7 +55,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   private updateItemsActual(): void {
-    this.itemsActual = this.items.slice(this.initialPageItem, this.initialPageItem + this.itemsPerPage);
+    this.itemsActual = this.itemsFull.slice(this.initialPageItem, this.initialPageItem + this.itemsPerPage);
   }
 
   public isDisabledBack(): boolean {

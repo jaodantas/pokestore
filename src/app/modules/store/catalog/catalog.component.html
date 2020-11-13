@@ -1,13 +1,28 @@
 <div class="row">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
+        <div>
+            <label for="name">
+            Name
+            </label>
+            <input id="name" type="text" formControlName="name">
+        </div>
+    
+        <button class="button" type="submit">Pesquisar</button>
+    </form>
+</div>
+
+<div class="row">
     <div class="col-4 items" *ngFor="let pokemon of pokemonListPage">
         <app-item [pokemonId]="pokemon.id"></app-item>
     </div>
 </div>
 
 <div class="row">
-    <app-paginator *ngIf="pokemonListFull"
-        [items]="pokemonListFull"
+    <app-paginator *ngIf="pokemonList$"
+        [items$]="pokemonList$"
         [itemsPerPage]="itemsPerPage"
         (itemsPage)="updateActualItems($event)"
     ></app-paginator>
 </div>
+
+<app-modal></app-modal>

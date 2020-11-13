@@ -40,8 +40,8 @@ export class StoreApiService {
       )
   }
 
-  public getPokemonByIdOrName(id: string): Observable<any> {
-    const payload = { id };
+  public getPokemonByIdOrName(value: string): Observable<any> {
+    const payload = { value };
     return this.apiService.get(apiConfig.get_pokemon, payload)
       .pipe(
         map((pokemon: any) => {
