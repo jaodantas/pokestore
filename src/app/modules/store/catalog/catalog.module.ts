@@ -4,6 +4,7 @@ import { CatalogComponent } from './catalog.component';
 import { ItemComponent } from './item/item.component';
 import { PaginatorModule } from 'src/app/core/layout/components/paginator/paginator.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'src/app/core/layout/components/modal/modal.module';
 
 
 
@@ -12,7 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule
   ],
   exports: [CatalogComponent]
 })

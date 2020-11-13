@@ -24,4 +24,8 @@ export class CartComponent implements OnInit {
     this.store.dispatch(clean());
   }
 
+  public finish(): void {
+    
+  }
+
 }
