@@ -51,8 +51,8 @@ export class PaginatorComponent implements OnInit {
       pluck('name'),
       map(name => {
         this.updateItemsFiltered(name);
-        this.updateItemsActual()
         this.updatePageIndex();
+        this.updateItemsActual()
         this.sendActualItems();
       })
     ).subscribe();
@@ -62,7 +62,7 @@ export class PaginatorComponent implements OnInit {
   public updatePageIndex(): void {
     this.pageTotal = Math.floor(this.itemsFiltered.length / this.itemsPerPage)
           + ( (this.itemsFiltered.length % this.itemsPerPage) ? 1 : 0);
-    this.pageActual = 1;
+    this.pageActual = this.pageTotal && 1;
   }
 
   public next(toTheEnd?: boolean): void {

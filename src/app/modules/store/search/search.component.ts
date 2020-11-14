@@ -38,7 +38,6 @@ export class SearchComponent implements OnInit {
   }
 
   public keyupSearch(event): void {
-    debugger;
     this.keyupHandler.next(this.searchForm.controls.name.value);
   }
 
@@ -46,10 +45,7 @@ export class SearchComponent implements OnInit {
     this.keyupHandler.pipe(
       debounceTime(500)
     ).subscribe(
-      (name) => {
-        debugger;
-        this.store.dispatch(send({search: { name }}))
-      }
+      (name) => ( this.store.dispatch(send({search: { name }})))
     );
   }
 
