@@ -1,1 +1,13 @@
-<p>header works!</p>
+<div class="container row">
+    <div class="row">
+        <div class="col-md-4">
+            <ng-content select="[title]"></ng-content>
+        </div>
+        <div class="col-md-5">
+            <ng-content select="[search]"></ng-content>
+        </div>
+        <div class="col-md-3">
+            <ng-content select="[user]"></ng-content>
+        </div>
+    </div>
+</div>

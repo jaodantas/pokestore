@@ -14,11 +14,12 @@
         <button (click)="finish()">Finalizar</button>
         <button (click)="clean()">Limpar</button>
     </div>
-</div>
 
-<app-modal
-    [show]="modalShow"
-    title="Modal"
-    message="Mensagem"
-    (onClose)="onModalClose($event)">
-</app-modal>
+    <app-modal
+        [show]="modalShow"
+        title="Obrigado!"
+        message="Você ganhou de volta {{ cart.total }}"
+        (onClose)="onModalClose($event)">
+    </app-modal>
+
+</div>

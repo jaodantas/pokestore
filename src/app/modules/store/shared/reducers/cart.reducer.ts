@@ -3,12 +3,12 @@ import { add, decrement, clean } from '../actions/cart.actions';
 import { CartModel } from '../interfaces/cart.model';
 import { PokemonModel } from '../interfaces/pokemon.model';
 
-export const initialState: CartModel = { 
+export const cartState: CartModel = { 
     total: 0,
     items: []
 };
 
-const _cartReducer = createReducer(initialState,
+const _cartReducer = createReducer(cartState,
   on(add, (state, { pokemon }) => {
     const items = increaseItem(state.items, pokemon);
     const total = getTotal(items);
@@ -19,7 +19,7 @@ const _cartReducer = createReducer(initialState,
     const total = getTotal(items);
     return { items, total }
   }),
-  on(clean, state => (initialState)),
+  on(clean, state => (cartState)),
 );
 
 export function cartReducer(state, action) {

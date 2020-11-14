@@ -30,6 +30,7 @@ export class CartComponent implements OnInit {
   }
 
   public onModalClose(event): void {
+    this.store.dispatch(clean());
     this.modalShow = event && false;
   }
 
