@@ -92,7 +92,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   private updateItemsFiltered(name): void {
-    this.itemsFiltered = name ? this.itemsFull.filter(pokemon => pokemon.name === name) : this.itemsFull;
+    this.itemsFiltered = name ? this.itemsFull.filter(pokemon => pokemon.name.includes(name)) : this.itemsFull;
   }
 
   private updateItemsActual(): void {

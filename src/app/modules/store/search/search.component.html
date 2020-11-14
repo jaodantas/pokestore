@@ -4,7 +4,7 @@
             <label for="name">
             Name
             </label>
-            <input id="name" type="text" formControlName="name">
+            <input (keyup)="keyupSearch($event)" id="name" type="text" formControlName="name">
         </div>
     
         <button class="button" type="submit">Pesquisar</button>
