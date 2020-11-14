@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, pluck, tap } from 'rxjs/operators';
+import { setAll } from '../shared/actions/catalog.actions';
+import { CatalogModel } from '../shared/interfaces/catalog.model';
 import { PokemonModel } from '../shared/interfaces/pokemon.model';
 import { SearchModel } from '../shared/interfaces/search.model';
 import { StoreApiService } from '../shared/services/store-api.service';
@@ -14,23 +16,22 @@ import { StoreApiService } from '../shared/services/store-api.service';
 })
 export class CatalogComponent implements OnInit {
 
-  public search$: Observable<SearchModel>;
+  public catalog$: Observable<CatalogModel>;
 
   constructor(
     private storeApiService: StoreApiService,
-    private store: Store<{search: SearchModel}>
+    private store: Store<any>
   ) { 
-    this.search$ = this.store.pipe(select('search'));
+    this.catalog$ = this.store.pipe(select('catalog'));
   }
 
   public pokemonTypes: Array<any>;
   public pokemonListFull: Array<PokemonModel>;
-  public pokemonList$: Subject<Array<PokemonModel>> = new Subject<Array<PokemonModel>>();
-  public pokemonListPage: Array<PokemonModel>;
+  public pokemonListPage$: Observable<Array<PokemonModel>>;
   public itemsPerPage: number = 6;
 
   public ngOnInit(): void {
-    this.onSearchListening();
+    this.updateActualItems();
     this.getAllPokemonNameFromType(10);
   }
 
@@ -42,23 +43,23 @@ export class CatalogComponent implements OnInit {
 
   public getAllPokemonNameFromType(typeId): void {
     this.storeApiService.getAllPokemonsFromType(typeId).pipe(
-      tap(pokemons => this.pokemonListFull = pokemons),
-      tap(pokemons => this.pokemonList$.next(pokemons)),
-    ).subscribe();
-  }
-
-  public updateActualItems(event): void {
-      this.pokemonListPage = event;
-  }
-
-  public onSearchListening(): void {
-    this.search$.pipe(
-      map(({ name }) => {
-        this.pokemonList$.next(name ? 
-          this.pokemonListFull.filter(pokemon => pokemon.name === name) : this.pokemonListFull
-        );
+      map(pokemons => {
+        this.store.dispatch(
+          setAll({ 
+            catalog: {
+              full: pokemons,
+              page: [],
+            }
+          }));
+        this.pokemonListFull = pokemons;
       })
     ).subscribe();
+  }
+
+  public updateActualItems(): void {
+    this.pokemonListPage$ = this.catalog$.pipe(
+        pluck('page'),
+      );
   }
 
 }

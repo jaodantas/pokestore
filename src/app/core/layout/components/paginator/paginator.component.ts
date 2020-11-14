@@ -1,5 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { filter, map, pluck, tap } from 'rxjs/operators';
+import { setPage } from 'src/app/modules/store/shared/actions/catalog.actions';
+import { CatalogModel } from 'src/app/modules/store/shared/interfaces/catalog.model';
+import { SearchModel } from 'src/app/modules/store/shared/interfaces/search.model';
 
 @Component({
   selector: 'app-paginator',
@@ -8,30 +13,56 @@ import { Observable, Subject } from 'rxjs';
 })
 export class PaginatorComponent implements OnInit {
 
-  @Input() items$: Subject<Array<any>>;
   @Input() itemsPerPage: number = 6;
-  @Output() itemsPage = new EventEmitter<any>();
 
   public itemsFull: Array<any>;
+  public itemsFiltered: Array<any>;
   public itemsActual: Array<any>;
   public pageActual: number;
   public pageTotal: number;
 
-  constructor() { }
+  public catalog$: Observable<CatalogModel>;
+  public search$: Observable<SearchModel>;
+
+  constructor(
+    private store: Store<any>
+  ) { 
+    this.catalog$ = this.store.pipe(select('catalog'));
+    this.search$ = this.store.pipe(select('search'));
+  }
 
   public ngOnInit(): void {
 
-    this.items$.subscribe(
-      (items) => {
+    this.catalog$.pipe(
+      pluck('full'),
+      filter(items => items !== this.itemsFull),
+      map((items) => {
         this.itemsFull = items;
+        this.itemsFiltered = items;
         this.pageTotal = Math.floor(items.length / this.itemsPerPage)
           + ( (items.length % this.itemsPerPage) ? 1 : 0);
         this.pageActual = 1;
         this.updateItemsActual();
         this.sendActualItems();
-      }
-    )
+      })
+    ).subscribe();
 
+    this.search$.pipe(
+      pluck('name'),
+      map(name => {
+        this.updateItemsFiltered(name);
+        this.updateItemsActual()
+        this.updatePageIndex();
+        this.sendActualItems();
+      })
+    ).subscribe();
+
+  }
+
+  public updatePageIndex(): void {
+    this.pageTotal = Math.floor(this.itemsFiltered.length / this.itemsPerPage)
+          + ( (this.itemsFiltered.length % this.itemsPerPage) ? 1 : 0);
+    this.pageActual = 1;
   }
 
   public next(toTheEnd?: boolean): void {
@@ -47,15 +78,25 @@ export class PaginatorComponent implements OnInit {
   }
 
   private sendActualItems(): void {
-    this.itemsPage.emit(this.itemsActual);
+    this.store.dispatch(
+      setPage({ 
+        catalog: { 
+          page: this.itemsActual,
+          full: [],
+        }
+      }));
   }
 
   private get initialPageItem(): number {
     return this.itemsPerPage*(this.pageActual-1);
   }
 
+  private updateItemsFiltered(name): void {
+    this.itemsFiltered = name ? this.itemsFull.filter(pokemon => pokemon.name === name) : this.itemsFull;
+  }
+
   private updateItemsActual(): void {
-    this.itemsActual = this.itemsFull.slice(this.initialPageItem, this.initialPageItem + this.itemsPerPage);
+    this.itemsActual = this.itemsFiltered.slice(this.initialPageItem, this.initialPageItem + this.itemsPerPage);
   }
 
   public isDisabledBack(): boolean {

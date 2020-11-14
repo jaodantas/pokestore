@@ -7,7 +7,7 @@ export const searchState: SearchModel = {
 };
 
 const _searchReducer = createReducer(searchState,
-  on(send, (state, { search }) => (state = search)),
+  on(send, (state, { search }) => (search)),
 );
 
 export function searchReducer(state, action) {

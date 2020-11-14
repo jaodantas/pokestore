@@ -1,13 +1,12 @@
-<div class="row">
+<div class="row" *ngIf="pokemonListPage$ | async as pokemonListPage">
     <div class="col-4 items" *ngFor="let pokemon of pokemonListPage">
         <app-item [pokemonId]="pokemon.id"></app-item>
     </div>
 </div>
 
 <div class="row">
-    <app-paginator *ngIf="pokemonList$"
-        [items$]="pokemonList$"
+    <app-paginator *ngIf="pokemonListFull"
+        [items$]="pokemonListFull"
         [itemsPerPage]="itemsPerPage"
-        (itemsPage)="updateActualItems($event)"
     ></app-paginator>
 </div>

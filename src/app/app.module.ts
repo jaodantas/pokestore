@@ -12,10 +12,12 @@ import { cartReducer } from './modules/store/shared/reducers/cart.reducer';
 import { ReactiveFormsModule } from '@angular/forms';
 import { searchReducer } from './modules/store/shared/reducers/search.reducer';
 import { AppStatesModel } from './modules/store/shared/interfaces/app-states.model';
+import { catalogReducer } from './modules/store/shared/reducers/catalog.reducer';
 
 export const appReducer: ActionReducerMap<AppStatesModel> = {
   cart: cartReducer,
   search: searchReducer,
+  catalog: catalogReducer,
 };
 
 @NgModule({
