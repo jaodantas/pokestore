@@ -1,7 +1,7 @@
 <div class="container item">
     <div *ngIf="pokemon$ | async as pokemon; else loading">
         <div class="row image-div">
-            <div class="col-sm-12 col-12 d-flex justify-content-center">
+            <div class="col-sm-12 col-12 d-flex justify-content-center image-cont">
                 <img *ngIf="pokemon.img" class="image" [src]="pokemon?.img" [alt]="pokemon?.name">
                 <div *ngIf="!pokemon.img" class="square"></div>
             </div>

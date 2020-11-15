@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { clean } from '../shared/actions/cart.actions';
+import { clean, decrement } from '../shared/actions/cart.actions';
 import { CartModel } from '../shared/interfaces/cart.model';
 
 @Component({
@@ -32,6 +32,10 @@ export class CartComponent implements OnInit {
   public onModalClose(event): void {
     this.store.dispatch(clean());
     this.modalShow = event && false;
+  }
+
+  public decrement(pokemon): void {
+    this.store.dispatch(decrement({ pokemon }));
   }
 
 }
