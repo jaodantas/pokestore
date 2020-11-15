@@ -1,19 +1,58 @@
 <div class="container cart">
     <div *ngIf="cart$ | async as cart">
-        <p>Carrinho: </p>
-        <div>
-            <div *ngFor="let pokemon of cart?.items">
-                <p>Nome: {{ pokemon.name }}</p>
-                <p>Preço: {{ pokemon.price }}</p>
-                <p>Qt: {{ pokemon.quantity }}</p>
+        <div class="row">
+            <h4 class="col-12 col-sm-12 d-flex justify-content-start">
+                Resumo do pedido:
+            </h4>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr class="text-light"> 
+            </div>
+        </div>
+        
+        <div class="row" *ngFor="let pokemon of cart?.items">
+            <div class="col-12 col-sm-12 cart-items">
+                <div class="row">
+                    <div class="col-6 col-sm-6">
+                        <p class="item-name">{{ pokemon.name }}</p>
+                    </div>
+                    <div class="col-6 col-sm-6 d-flex justify-content-end">
+                        <p>${{ pokemon.price }},00</p>
+                    </div>
+                </div>
+                <div class="row d-flex align-items-center">
+                    <div class="col-1 col-sm-1">
+                        <p>{{ pokemon.quantity }}</p>
+                    </div>
+                    <div class="col-1 col-sm-1">
+                        <button class="btn btn-link text-dark">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="col-10 col-sm-10 d-flex justify-content-end">
+                        <p class="font-weight-bold">${{ pokemon.quantity * pokemon.price}},00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <hr class="text-light"> 
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                <p>Total:</p>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <h5>${{ cart.total }},00</h5>
             </div>
         </div>
         <div>
-            <p>Total: {{ cart.total }}</p>
-        </div>
-        <div>
-            <button (click)="finish()">Finalizar</button>
-            <button (click)="clean()">Limpar</button>
+            <button class="btn btn-light" (click)="clean()">Limpar</button>
+            <button class="btn btn-light" (click)="finish()">Finalizar</button>
         </div>
     
         <app-modal
