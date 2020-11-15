@@ -1,1 +1,23 @@
-<a routerLink="/store" routerLinkActive="active">Store</a>
+<div class="container">
+    <div class="row justify-content-start">
+        <div class="col-lg-1 d-flex align-items-center">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Lojas</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem routerLink="/store" routerLinkActive="active">Fogo</button>
+              <button ngbDropdownItem>Água</button>
+              <button ngbDropdownItem>Planta</button>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-lg-1 d-flex align-items-center">
+            <a href="">Ofertas</a>
+        </div>
+    
+        <div class="col-lg-2 d-flex align-items-center">
+            <a href="">Dev Área</a>
+        </div>
+    </div>
+
+</div>

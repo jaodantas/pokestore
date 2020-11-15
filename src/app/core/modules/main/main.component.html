@@ -1,20 +1,25 @@
 <div class="container-fluid h-100">
-    <div class="row">
-        <div class="col-md-12 header">
+    <div class="row header justify-content-start">
+        <div class="col-lg-1 das-font">
+            <h1>PokeStore</h1>
+        </div>
+        <div class="col-lg-10">
             <app-header>
+                <h2 class="das-font" title>Fire</h2>
                 <app-search search></app-search>
+                <p user>User</p>
             </app-header>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12 menu">
+        <div class="col-lg-12 menu">
             <app-menu></app-menu>
         </div>
     </div>
 
     <div class="row main">
-        <div class="col-12">
+        <div class="col-lg-12">
             <router-outlet></router-outlet>
         </div>
     </div>

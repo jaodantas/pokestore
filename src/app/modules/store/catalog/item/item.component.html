@@ -1,11 +1,23 @@
-<div *ngIf="pokemon$ | async as pokemon; else loading">
-    <p>Nome: {{ pokemon?.name }}</p>
-    <p>Preço: {{ pokemon?.price }}</p>
-    <img [src]="pokemon?.img" [alt]="pokemon?.name">
-    <button (click)=add(pokemon)>Add</button>
-    <button (click)=decrement(pokemon)>Remove</button>
-</div>
+<div class="container item">
+    <div *ngIf="pokemon$ | async as pokemon; else loading">
+        <div class="row">
+            <div class="col-lg-12 image">
+                <img [src]="pokemon?.img" [alt]="pokemon?.name">
+            </div>
+        </div>
+        <div class="row">
+            <p>Nome: {{ pokemon?.name }}</p>
+        </div>
+        <div class="row">
+            <p>Preço: {{ pokemon?.price }}</p>
+        </div>
+        <div class="row">
+            <button (click)=add(pokemon)>Add</button>
+            <button (click)=decrement(pokemon)>Remove</button>
+        </div>
+    </div>
 
-<ng-template #loading>
-    <p>Carregando...</p>
-</ng-template>
+    <ng-template #loading>
+        <p>Carregando...</p>
+    </ng-template>
+</div>

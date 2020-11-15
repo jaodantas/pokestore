@@ -1,25 +1,26 @@
-<div *ngIf="cart$ | async as cart">
-    <p>Carrinho: </p>
-    <div>
-        <div *ngFor="let pokemon of cart?.items">
-            <p>Nome: {{ pokemon.name }}</p>
-            <p>Preço: {{ pokemon.price }}</p>
-            <p>Qt: {{ pokemon.quantity }}</p>
+<div class="container cart">
+    <div *ngIf="cart$ | async as cart">
+        <p>Carrinho: </p>
+        <div>
+            <div *ngFor="let pokemon of cart?.items">
+                <p>Nome: {{ pokemon.name }}</p>
+                <p>Preço: {{ pokemon.price }}</p>
+                <p>Qt: {{ pokemon.quantity }}</p>
+            </div>
         </div>
+        <div>
+            <p>Total: {{ cart.total }}</p>
+        </div>
+        <div>
+            <button (click)="finish()">Finalizar</button>
+            <button (click)="clean()">Limpar</button>
+        </div>
+    
+        <app-modal
+            [show]="modalShow"
+            title="Obrigado!"
+            message="Você ganhou de volta {{ cart.total }}"
+            (onClose)="onModalClose($event)">
+        </app-modal>
     </div>
-    <div>
-        <p>Total: {{ cart.total }}</p>
-    </div>
-    <div>
-        <button (click)="finish()">Finalizar</button>
-        <button (click)="clean()">Limpar</button>
-    </div>
-
-    <app-modal
-        [show]="modalShow"
-        title="Obrigado!"
-        message="Você ganhou de volta {{ cart.total }}"
-        (onClose)="onModalClose($event)">
-    </app-modal>
-
 </div>

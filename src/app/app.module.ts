@@ -25,14 +25,14 @@ export const appReducer: ActionReducerMap<AppStatesModel> = {
     AppComponent,
   ],
   imports: [
-    BrowserModule,
-    LayoutModule,
-    PokeStoreModule,
     AppRoutingModule,
-    MainModule,
+    BrowserModule,
     HttpClientModule,
+    LayoutModule,
+    MainModule,
+    PokeStoreModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(appReducer)
+    StoreModule.forRoot(appReducer),
   ],
   providers: [],
   bootstrap: [AppComponent]

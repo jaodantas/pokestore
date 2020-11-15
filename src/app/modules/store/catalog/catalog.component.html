@@ -1,12 +1,15 @@
-<div class="row" *ngIf="pokemonListPage$ | async as pokemonListPage">
-    <div class="col-4 items" *ngFor="let pokemon of pokemonListPage">
-        <app-item [pokemonId]="pokemon.id"></app-item>
+<div class="container catalog">
+    <div class="row d-flex justify-content-around" *ngIf="pokemonListPage$ | async as pokemonListPage">
+        <div class="col-lg-3 items" *ngFor="let pokemon of pokemonListPage">
+            <app-item [pokemonId]="pokemon.id"></app-item>
+        </div>
     </div>
-</div>
+    
+    <div class="row">
+        <app-paginator *ngIf="pokemonListFull"
+            [items$]="pokemonListFull"
+            [itemsPerPage]="itemsPerPage"
+        ></app-paginator>
+    </div>
 
-<div class="row">
-    <app-paginator *ngIf="pokemonListFull"
-        [items$]="pokemonListFull"
-        [itemsPerPage]="itemsPerPage"
-    ></app-paginator>
 </div>
