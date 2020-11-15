@@ -4,7 +4,7 @@ import { StoreComponent } from 'src/app/modules/store/store.component';
 import { PokeStoreModule } from 'src/app/modules/store/store.module';
 
 const routes: Routes = [
-  { path: 'store', component: StoreComponent },
+  { path: '', component: StoreComponent },
 ];
 
 @NgModule({
