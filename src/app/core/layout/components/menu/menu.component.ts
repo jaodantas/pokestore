@@ -1,4 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { change } from 'src/app/modules/store/shared/actions/type.actions';
+import { PokemonTypes } from 'src/app/modules/store/shared/enums/types.enum';
+import { TypeModel } from 'src/app/modules/store/shared/interfaces/type.model';
 
 @Component({
   selector: 'app-menu',
@@ -6,11 +10,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./menu.component.sass'],
   encapsulation: ViewEncapsulation.None
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
 
-  constructor() { }
+  public pokemonTypes: any = Object.entries(PokemonTypes);
+  constructor(private store: Store<{pokemonType: TypeModel}>) { }
 
-  ngOnInit(): void {
+  public goType(type: TypeModel): void {
+    this.store.dispatch(change({pokemonType: { name: type.name , id: type.id }}));
   }
 
 }

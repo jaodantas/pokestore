@@ -1,11 +1,11 @@
 <div class="container-fluid h-100">
-    <div class="row header justify-content-start">
+    <div class="row header justify-content-start {{getTheme()}}">
         <div class="col-lg-2 col-md-2 col-12 d-flex das-font">
             <h1>PokeStore</h1>
         </div>
         <div class="col-lg-10 col-md-10 col-12 d-flex flex-row">
             <app-header class="w-100">
-                <h2 class="das-font" title>Fire</h2>
+                <h2 class="das-font" title>{{ type?.name}}</h2>
                 <app-search search></app-search>
                 <i user class="far fa-user"></i>
             </app-header>

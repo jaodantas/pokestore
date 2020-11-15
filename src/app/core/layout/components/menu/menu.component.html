@@ -4,9 +4,8 @@
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle>Lojas</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem routerLink="/store" routerLinkActive="active">Fogo</button>
-              <button ngbDropdownItem>Água</button>
-              <button ngbDropdownItem>Planta</button>
+              <button *ngFor="let type of pokemonTypes" 
+                ngbDropdownItem (click)="goType(type[1])">{{type[0]}}</button>
             </div>
           </div>
         </div>

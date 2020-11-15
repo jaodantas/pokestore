@@ -7,6 +7,7 @@ import { setAll } from '../shared/actions/catalog.actions';
 import { CatalogModel } from '../shared/interfaces/catalog.model';
 import { PokemonModel } from '../shared/interfaces/pokemon.model';
 import { SearchModel } from '../shared/interfaces/search.model';
+import { TypeModel } from '../shared/interfaces/type.model';
 import { StoreApiService } from '../shared/services/store-api.service';
 
 @Component({
@@ -17,12 +18,14 @@ import { StoreApiService } from '../shared/services/store-api.service';
 export class CatalogComponent implements OnInit {
 
   public catalog$: Observable<CatalogModel>;
+  public pokemonType$: Observable<TypeModel>;
 
   constructor(
     private storeApiService: StoreApiService,
     private store: Store<any>
   ) { 
     this.catalog$ = this.store.pipe(select('catalog'));
+    this.pokemonType$ = this.store.pipe(select('pokemonType'));
   }
 
   public pokemonTypes: Array<any>;
@@ -32,7 +35,12 @@ export class CatalogComponent implements OnInit {
 
   public ngOnInit(): void {
     this.updateActualItems();
-    this.getAllPokemonNameFromType(10);
+
+    this.pokemonType$.pipe(
+      map(type => {
+        this.getAllPokemonNameFromType(type.id);
+      })
+    ).subscribe();
   }
 
   public getTypes(): void {
