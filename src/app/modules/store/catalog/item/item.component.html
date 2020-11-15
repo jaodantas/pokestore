@@ -2,13 +2,14 @@
     <div *ngIf="pokemon$ | async as pokemon; else loading">
         <div class="row image-div">
             <div class="col-sm-12 col-12 d-flex justify-content-center">
-                <img class="image" [src]="pokemon?.img" [alt]="pokemon?.name">
+                <img *ngIf="pokemon.img" class="image" [src]="pokemon?.img" [alt]="pokemon?.name">
+                <div *ngIf="!pokemon.img" class="square"></div>
             </div>
         </div>
         <div class="row d-flex align-middle">
             <div class="col-lg-8 col-8 col-sm-8">
                 <div class="row name">
-                    <p>Nome: {{ pokemon?.name }}</p>
+                    <p>{{ pokemon?.name }}</p>
                 </div>
                 <div class="row price">
                     <p>${{ pokemon?.price }},00</p>

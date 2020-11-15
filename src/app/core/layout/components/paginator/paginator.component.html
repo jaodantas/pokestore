@@ -1,8 +1,22 @@
+<div class="container paginator">
+    <div class="row d-flex justify-content-center">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-light col" [disabled]="isDisabledBack()" (click)="back(true)"> &lt;&lt; </button>
+        </div>
+        <div class="d-flex align-items-center">
+            <button class="btn btn-light col" [disabled]="isDisabledBack()" (click)="back()"> &lt; </button>
+        </div>
+        <div class="d-flex align-items-center">
+            <p class="col d-flex align-items-center">{{ pageActual }} de {{ pageTotal }}</p>
+        </div>
+        <div class="d-flex align-items-center">
+            <button class="btn btn-light col" [disabled]="isDisabledNext()" (click)="next()"> &gt; </button>
+        </div>
+        <div class="d-flex align-items-center">
+            <button class="btn btn-light col" [disabled]="isDisabledNext()" (click)="next(true)"> &gt;&gt; </button>
+        </div>
+    </div>
+</div>
 <div>
-    <button [disabled]="isDisabledBack()" (click)="back(true)"> &lt;&lt; </button>
-    <button [disabled]="isDisabledBack()" (click)="back()"> &lt; </button>
-    <p>{{ pageActual }} de {{ pageTotal }}</p>
-    <button [disabled]="isDisabledNext()" (click)="next()"> &gt; </button>
-    <button [disabled]="isDisabledNext()" (click)="next(true)"> &gt;&gt; </button>
 </div>
 

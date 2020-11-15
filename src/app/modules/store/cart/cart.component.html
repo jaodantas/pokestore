@@ -11,7 +11,7 @@
             </div>
         </div>
         
-        <div class="row" *ngFor="let pokemon of cart?.items">
+        <div class="row text-secondary overflow-auto" *ngFor="let pokemon of cart?.items">
             <div class="col-12 col-sm-12 cart-items">
                 <div class="row">
                     <div class="col-6 col-sm-6">
@@ -26,18 +26,18 @@
                         <p>{{ pokemon.quantity }}</p>
                     </div>
                     <div class="col-1 col-sm-1">
-                        <button class="btn btn-link text-dark">
+                        <button class="btn btn-link text-secondary">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </div>
-                    <div class="col-10 col-sm-10 d-flex justify-content-end">
+                    <div class="col col-sm d-flex justify-content-end">
                         <p class="font-weight-bold">${{ pokemon.quantity * pokemon.price}},00</p>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <hr class="text-light"> 
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="text-light"> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,9 +50,13 @@
                 <h5>${{ cart.total }},00</h5>
             </div>
         </div>
-        <div>
-            <button class="btn btn-light" (click)="clean()">Limpar</button>
-            <button class="btn btn-light" (click)="finish()">Finalizar</button>
+        <div class="row">
+            <div class="col-3">
+                <button class="btn btn-light" (click)="clean()">Limpar</button>
+            </div>
+            <div class="col-9 d-flex justify-content-end">
+                <button class="btn btn-light col-12" (click)="finish()">Finalizar</button>
+            </div>
         </div>
     
         <app-modal

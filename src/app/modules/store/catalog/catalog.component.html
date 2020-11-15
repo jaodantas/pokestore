@@ -6,10 +6,12 @@
     </div>
     
     <div class="row">
-        <app-paginator *ngIf="pokemonListFull"
-            [items$]="pokemonListFull"
-            [itemsPerPage]="itemsPerPage"
-        ></app-paginator>
+        <div class="col-12">
+            <app-paginator *ngIf="pokemonListFull"
+                [items$]="pokemonListFull"
+                [itemsPerPage]="itemsPerPage"
+            ></app-paginator>
+        </div>
     </div>
 
 </div>
